@@ -1,0 +1,214 @@
+#!/usr/bin/python2
+# -*- encoding: utf-8 -*-
+# Tiedot v0.1.0
+# Tie with a Dot underneath.
+# Copyright © 2012, Kwpolska.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions, and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions, and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the author of this software nor the names of
+#    contributors to this software may be used to endorse or promote
+#    products derived from this software without specific prior written
+#    consent.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+"""
+    Tiedot Hub
+    ~~~~~~~~~~
+
+    The hub of a Tie with a Dot underneath.
+
+    :Copyright: © 2012, Kwpolska.
+    :License: BSD (see /LICENSE).
+"""
+import sys
+import os
+import argparse
+import tiedot
+from tiedot.ui.cli import CLI
+from tiedot.auth import AuthError
+COMMANDS = ['shell', 'sync', 'server']
+class Shell(object):
+    """Shell activation code.  Some code stolen from Django."""
+    shells = ['ipython', 'bpython', 'plain']
+
+    def ipython(self):
+        """IPython shell."""
+        sys.stdout.write('Embedding IPython...')
+        import IPython
+        print(' done.')
+        IPython.embed()
+
+    def bpython(self):
+        """bpython shell."""
+        sys.stdout.write('Embedding bpython...')
+        import bpython
+        print(' done.')
+        bpython.embed()
+
+    def plain(self):
+        """Plain Python shell."""
+        sys.stdout.write('Embedding Python...')
+        tobj = tiedot.getobjects()
+        import code
+        try:
+            import readline
+        except ImportError:
+            pass
+        else:
+            import rlcompleter
+            readline.set_completer(rlcompleter.Completer(tobj).complete)
+            readline.parse_and_bind("tab:complete")
+
+        if not use_plain:
+            pythonrc = os.environ.get("PYTHONSTARTUP")
+            if pythonrc and os.path.isfile(pythonrc):
+                try:
+                    execfile(pythonrc)
+                except NameError:
+                    pass
+            # import user
+        sys.stdout.write(' done.')
+        code.interact(local=tobj)
+
+    def run(self, shell=None):
+        """Run the shell."""
+        print('Tiedot v{}/Tiedot Shell.  Copyright © 2012, '
+              'Kwpolska.'.format(tiedot.__version__))
+        auth()
+        if shell != 'auto':
+            return getattr(self, shell)()
+        else:
+            for shell in self.shells:
+                try:
+                    return getattr(self, shell)()
+                except ImportError:
+                    pass
+            raise ImportError
+
+
+parser = argparse.ArgumentParser(description='Tie with a Dot undernath.',
+                                 version='Tiedot v{}'.format(
+                                     tiedot.__version__))
+
+sp = parser.add_subparsers(help='commands')
+
+shellp = sp.add_parser('shell', help='A shell, using {i,b,}python.')
+shellp.add_argument('-s', '--shell', choices=Shell().shells, default=None,
+                    help='Shell to use')
+shellp.set_defaults(command='shell')
+
+syncp = sp.add_parser('sync', help='Run the Tiedot NA Sync.')
+syncp.set_defaults(command='sync')
+
+syncp.add_argument('addr', nargs='?', default='__conf__', help='Server address')
+syncp.add_argument('port', nargs='?', type=int, default=-1, help='Server port')
+
+serverp = sp.add_parser('server', help='Run the Tiedot NA Server.')
+serverp.set_defaults(command='server')
+serverp.add_argument('port', nargs='?', type=int, default=-1, help='Port to use')
+
+args = parser.parse_args()
+
+if args.command == 'shell':
+    tiedot.UI = CLI()
+    from tiedot import *
+
+    def k(out):
+        """Handle magic."""
+        globals().update(out)
+
+    def deltdr(obj):
+        """Handle TDR deletion."""
+        k(tiedot.deltdr(obj))
+
+    def getobjects():
+        """Handle object retrieval."""
+        k(tiedot.getobjects())
+
+    def addtdr(obj):
+        """Handle TDR addition."""
+        k(tiedot.addtdr(obj))
+
+    def rehash():
+        """Rehash the config."""
+        k(tiedot.rehash())
+
+    def auth():
+        """Authenticate."""
+        try:
+            tiedot.UI.auth()
+        except AuthError as e:
+            print('Authentication error: ' + e)
+        except:
+            sys.exit(1)
+        else:
+            print('Access granted!')
+            getobjects()
+
+    def logout():
+        """Log out."""
+        tiedot.AUTH.logout('TiedotLogout')
+        auth()
+
+    Shell().run(args.shell)
+elif args.command == 'sync':
+    import logging
+    import tiedot.netaccess.client
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    console.setFormatter(logging.Formatter('[%(levelname)-7s] '
+                            ':%(name)-10s: %(message)s'))
+    logging.getLogger('').addHandler(console)
+    tiedot.UI = CLI()
+    tiedot.UI.auth()
+    if args.port == -1:
+        port = tiedot.CONFIG.get('naclient', 'port')
+    else:
+        port = args.port
+
+    if args.addr == '__conf__':
+        addr = tiedot.CONFIG.get('naclient', 'port')
+    else:
+        addr = args.addr
+
+    # Hello!
+    tiedot.netaccess.client.sync((tiedot.AUTH, addr, port))
+
+elif args.command == 'server':
+    import logging
+    import tiedot.netaccess.server
+    console = logging.StreamHandler()
+    console.setLevel(logging.DEBUG)
+    console.setFormatter(logging.Formatter('[%(levelname)-7s] '
+                            ':%(name)-10s: %(message)s'))
+    logging.getLogger('').addHandler(console)
+    tiedot.UI = CLI()
+
+    if args.port == -1:
+        port = tiedot.CONFIG.get('naserver', 'port')
+    else:
+        port = args.port
+
+    tiedot.netaccess.server.run(port)

@@ -1,0 +1,20 @@
+\select@language {english}
+\contentsline {part}{I\hspace {1em}Rationale}{1}
+\contentsline {part}{II\hspace {1em}Engine}{2}
+\contentsline {section}{\numberline {1}Python OOP Engine}{2}
+\contentsline {section}{\numberline {2}TDP}{2}
+\contentsline {section}{\numberline {3}TDR}{2}
+\contentsline {section}{\numberline {4}Authentication}{2}
+\contentsline {part}{III\hspace {1em}Network Access}{3}
+\contentsline {section}{\numberline {1}\textsc {BP}}{3}
+\contentsline {section}{\numberline {2}Data Dict}{3}
+\contentsline {section}{\numberline {3}Data Comparison Procedure}{3}
+\contentsline {section}{\numberline {4}Requirements for implementations}{3}
+\contentsline {section}{\numberline {5}Actions}{4}
+\contentsline {subsection}{\numberline {5.1}Sync}{4}
+\contentsline {subsection}{\numberline {5.2}\textsc {lna}}{4}
+\contentsline {subsection}{\numberline {5.3}User Modification}{4}
+\contentsline {section}{\numberline {6}Commands}{5}
+\contentsline {part}{IV\hspace {1em}Meta}{5}
+\contentsline {section}{\numberline {1}License}{6}
+\contentsline {section}{\numberline {2}Revisions}{7}

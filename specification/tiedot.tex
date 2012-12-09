@@ -1,0 +1,407 @@
+\documentclass[a4paper,english]{paper}
+\usepackage{fixltx2e}
+\usepackage{lmodern}
+\usepackage{tgheros} %helvet}
+\usepackage{DejaVuSansMono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{varioref}
+\usepackage{setspace}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+\usepackage{hyphenat}
+\usepackage[parfill]{parskip}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{setspace}
+\usepackage{textcomp}
+\usepackage{xfrac}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{paralist}
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[vario]{fancyref}
+\def\hypdate{\kern.1em-\kern.1em}
+\def\ndash{\ts--\hskip.25em}
+\def\mdash{\ts---\hskip.25em}
+\onehalfspacing
+\nonfrenchspacing
+\makeatletter
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+\newcommand{\noun}[1]{\textsc{#1}}
+\providecommand{\\}{\\}
+\date{}
+\makeatother
+\setlength{\topmargin}{-0.5in}
+\setlength{\textheight}{10in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+\newcommand{\version}{0.1.0}
+\usepackage{babel}
+\begin{document}
+\title{Tiedot Specification}
+\subtitle{version \version}
+\author{\emph{Chris }Kwpolska\emph{ Warrick}}
+\date{2012-11-25T20:00:00Z}
+
+\maketitle
+\pagenumbering{roman}
+
+\textsf{The key words ``MUST'', ``MUST NOT'', ``REQUIRED'', ``SHALL'', ``SHALL
+    NOT'', ``SHOULD'', ``SHOULD NOT'', ``RECOMMENDED'',  ``MAY'', and ``OPTIONAL''
+in this document are to be interpreted as described in RFC 2119.}
+
+\tableofcontents
+
+
+%%% PART I. Rationale %%%
+
+
+\pagebreak
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\part{Rationale}
+\label{Rationale}
+
+The Tiedot project is a data storage system by Chris \emph{Kwpolska} Warrick,
+built on top of python and the following elements:
+\begin{enumerate}
+    \item \textbf{The Tiedot Rationale}, this paragraph, which describes the need for
+        this whole thing;
+    \item \textbf{Engine}, including:
+        \begin{enumerate}[(1)]
+            \item \textbf{Python OOP Engine}, providing specific classes for every
+                Element and its needs;
+            \item \textbf{TDP}, for storing the data;
+            \item \textbf{TDR}, alias references for the data;
+            \item \textbf{Authentication}, used for access control.
+        \end{enumerate}
+    \item \textbf{Network Access}, used to  access data from the network, in the
+        following ways (\emph{Actions}):
+        \begin{enumerate}[(1)]
+            \item \textbf{Sync}, syncing data between the client and the
+                server, allowing to use the data by the client without a
+                network connection;
+            \item \textbf{Live Network Access} (\textsc{lna}), used to access
+                the data one-by-one, and send them in the same way;
+            \item \textbf{Web Client}, used to access data through a web browser.
+        \end{enumerate}
+        Additionally, all data access must happen through encrypted protocols.
+\end{enumerate}
+
+\pagebreak
+
+
+%%% PART II. Engine %%%
+
+
+\part{Engine}
+\label{chap:Engine}
+\section{Python OOP Engine}
+\label{sec:Python OOP Engine}
+
+The main engine of the Tiedot is the Python programming language.  Its
+technologies and awesomeness are used to store, create and make use of the
+objects.  Main module used is the \texttt{pickle} module, explained further in
+\fref{sec:TiedotDP} (\textsc{tdp}---Tiedot Data Pickles).
+
+Since 2012-12-01, Python must be in version 2.7.3.  Otherwise, the Sync
+protocol will not work.
+
+\section{TDP}
+\label{sec:TDP}
+
+Tiedot Data Pickles are the files storing all objects of the System.  They are the
+standard Python pickles, with protocol version 2.  They contain the
+\texttt{Object()}s and other objects used by the system (authentication data,
+\textsc{tdr}s)
+
+\section{TDR}
+\label{sec:TDR}
+
+TDR is an additional, optional reference to an object.  Created by something
+as easy as \texttt{TDR = full.object.path}, they are providing an easy way to
+refer to objects that are referred to a lot.  Although the method of creation
+is very easy, to ensure safe performance of all authorized activities, they
+should be modified using the \texttt{addtdr()} and \texttt{rmtdr()}
+functions and with \texttt{obj.tdr} set to the \textsc{tdr}.  Otherwise, they will
+not be remembered for future sessions.
+
+The suggested length of a TDR is \textbf{4}, although it doesn't matter to the
+Tiedot.  This is a suggestion by a human, for humans.
+
+\section{Authentication}
+\label{sec:Authentication}
+
+All authentication stuff is done by \texttt{tiedot.AUTH}, an instance of
+\texttt{tiedot.auth.Auth}.  It should be used with credential providers, eg.
+\texttt{tiedot.ui.cli.auth}.
+
+Account modification actions require synchronization with the sync server, using the \texttt{USERMOD} action.
+\pagebreak
+
+
+%%% PART III. Network Access %%%
+
+
+\part{Network Access}
+\label{chap:Network Access}
+\setcounter{section}{0}
+Tiedot has multiple Network Access features.  They are using Twisted, Python and
+other solutions to provide a consistent interface.
+
+\section{\textsc{BP}}
+\label{sec:BP}
+BP stands for \emph{Base64-Pickle}.  It is a method of transporting data.
+Pickle protocol 2 applies.
+
+\section{Data Dict}
+\label{sec:Data Dict}
+The Data Dict is a dict of file SHA1 sums (\texttt{s}) and timestamps
+(\texttt{t}), transported as a BP.
+
+\section{Data Comparison Procedure}
+\begin{tabular}{|ll|}
+    \hline
+    \textbf{ITMS} & All items. \\
+    \textbf{HAVE} & Items to be sent to the client. \\
+    \textbf{WANT} & Items to be received from the client. \\
+    \textbf{NONE} & Items that are in sync on both sides. \\\hline
+\end{tabular}
+
+~
+
+\begin{enumerate}
+    \item Compare items.
+        \begin{enumerate}
+            \item \(=\) Continue.
+            \item \(\neq\) Add missing items to dicts with sha1sums and timestamps set to 0.
+        \end{enumerate}
+    \item Iterate over items.
+        \begin{enumerate}
+            \item Add the item to \(\rightarrow\)\textbf{ITMS}.
+            \item Compare checksums.
+                \begin{enumerate}
+                    \item \(=\text{ }\rightarrow\)\textbf{NONE}.
+                    \item \(\neq\) Compare timestamps.
+                        \begin{enumerate}
+                            \item \(S > C\text{ }\rightarrow\)\textbf{HAVE}.
+                            \item \(S < C\text{ }\rightarrow\)\textbf{WANT}.
+                            \item \(S = C\text{ Kill somebody and assume }\rightarrow\)\textbf{HAVE}.
+                        \end{enumerate}
+                \end{enumerate}
+        \end{enumerate}
+    \item Remove \texttt{\_\_auth\_\_.tdp} from the \textbf{WANT} list (if it is there), issue a warning (using the dedicated command of \texttt{AUTHTR} and force a replace by \texttt{HAVE}.
+\end{enumerate}
+
+\section{Requirements for implementations}
+\begin{enumerate}
+    \item SSL encryption.
+    \item Python + Twisted.
+    \item Proper security measures: authentication, file permissions, network config etc.
+    \item Communicate everything important to humans.
+\end{enumerate}
+
+\pagebreak
+\section{Actions}
+\label{sec:NA Actions}
+
+The following actions exist:
+
+\begin{table}[h!]
+    \begin{tabular}{llll}
+        \toprule
+        \multicolumn{2}{c}{Action Name} \\
+        \cmidrule(r){1-2}
+        \textbf{Full} & \textbf{Internal} & \textbf{Description} \\
+        \midrule
+        Sync & \texttt{SYNC} & A standard sync operation. \\
+        Live Network Access (\textsc{lna}) & \texttt{LNA} & A protocol for \emph{live}
+        data access. \\
+        User Modification & \texttt{USERMOD} & A user modification operation. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Actions.}
+\end{table}
+
+\subsection{Sync}
+The Sync action is used to synchronize data between the server and a client.  Afterwards, the client can disconnect from the Internet, cut the cable in half and make a figurine of Chris Warrick.  If your cable is long enough.
+
+\subsection{\textsc{lna}}
+
+The \textsc{lna} action is used to interact with the Tiedot without storing the data anywhere, in a live connection fashion.  You cannot cut your cable and make a figurine of yours truly.  Unfortunately.
+
+\subsection{User Modification}
+
+The User Modification action provides access to exactly that: user modification.  Request are placed in a queue, and are fulfilled after issuing \texttt{QUIT}.
+
+\pagebreak
+\section{Commands}
+\label{sec:NA Commands}
+
+Note that this list may change in the future.  The following are valid for the version of the Tiedot distributed alongside this document (\version{}).
+
+\begin{table}[h!]
+    \begin{tabular}{p{2cm}p{4.9cm}|cc|p{6.2cm}}
+        \toprule
+        \textbf{Command} & \textbf{Arguments} & \textbf{C} & \textbf{S} &
+        \textbf{Purpose} \\
+        \midrule
+        \texttt{HELLO} & last sync timestamp & + &   & Handshake. \\
+        \texttt{HOWDY} & current server timestamp &   & + & Handshake. \\
+        \texttt{AUTH} & username password& + &   & Authentication.  Password
+        is sha512. \\
+        \texttt{AUTHSTATUS} & auth status (0/1) &   & + & Authentication status.
+        \texttt{\(\ominus\)BYE} is mandatory after a failed authentication. \\
+        \texttt{ACTION} & action to use & + &   & Action to use.  More details in
+        \fref{sec:NA Actions}. \\
+        \texttt{ADDUSER} & username; password & + &   & Add an user. \\
+        \texttt{DELUSER} & username; password & + &   & Delete an user. \\
+        \texttt{CHANGEPWD} & old; new & + &   & Change current user's
+        password. \\
+        \texttt{USERMOD} & user modification status (0/1) &   & + & User
+        modification status.  (\emph{Sync}, \emph{User Modification}: Immediately followed by
+        mandatory \mbox{\texttt{AUTHTR}}, \texttt{FILES HAVE
+        \mbox{\emph{\_\_auth\_\_.tdp}}} and \texttt{\(\ominus\)BYE}.) \\
+        \texttt{AUTHTR} & &   & + & A warning informing that the
+        \mbox{\texttt{\_\_auth\_\_.tdp}} file cannot be transferred due to
+        security policies and a replacement of that file will be forced. \\
+        \texttt{FILES} & \texttt{HAVE}/\texttt{WANT} (\emph{Sync}),
+        \texttt{GET}/\texttt{PUT} (\emph{\textsc{lna}})
+        \texttt{\emph{BP(files)}}& + & + & File transmission. \\
+        \texttt{REFUSE} & refused item &  &  & The item is not accepted by the
+        server. \\
+        \texttt{QUIT} & reason (for humans to read) & + &   & Request to close the connection. \\
+        \texttt{BYE} & \(\oplus\) current server TS &   & + & Connection
+        closed. \\
+        & \(\ominus\) \texttt{HELLO} TS & & & \\
+        \bottomrule
+    \end{tabular}
+    \caption{Global NA commands.}
+    \label{tab:Global NA Commands}
+\end{table}
+
+\begin{table}[h!]
+    \begin{tabular}{p{2cm}p{4.9cm}|cc|p{6.2cm}}
+        \toprule
+        \textbf{Command} & \textbf{Arguments} & \textbf{C} & \textbf{S} &
+        \textbf{Purpose} \\
+        \midrule
+        \texttt{DIRS} & existing directories &   & + & BP of a list of all
+        existing directories. \\
+        \texttt{CURDATA} & current data & + &   & Data Dict---client's data. \\
+        \texttt{HAVE} & data to send to the client &   & + & Data
+        Dict---client's outdated data. \\
+        \texttt{WANT} & data to get from the client &   & + & Data
+        Dict---server's outdated data. \\
+        \texttt{DATAEQ} &  &   & + & Both sides have the same data. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Sync NA commands.}
+    \label{tab:Sync Commands}
+\end{table}
+
+\begin{table}[h!]
+    \begin{tabular}{p{2cm}p{4.9cm}|cc|p{6.2cm}}
+        \toprule
+        \textbf{Command} & \textbf{Arguments} & \textbf{C} & \textbf{S} &
+        \textbf{Purpose} \\
+        \midrule
+        \texttt{TREE} & BP(existing files and dirs) &   & + & A tree of files
+        on the server. \\
+        \texttt{MKDIR} & path & + &   & Directories to create. \\
+        \texttt{GET} & filename/\texttt{\_\_TREE\_\_} & + &   & Request a file
+        to get. \\
+        \texttt{PUT} & filename & + &   & Put a file up. \\
+        \texttt{REPR} & filename & + &   & Get a \texttt{\_\_repr\_\_()} of the
+        requested data, in plaintext. \\
+        \bottomrule
+    \end{tabular}
+    \caption{\textsc{lna} commands.}
+    \label{tab:LNA Commands}
+\end{table}
+
+
+%%% PART IV. Meta %%%
+
+
+\part{Meta}
+\label{chap:Meta}
+\setcounter{section}{0}
+\section{License}
+Copyright \textcopyright{} 2012, Kwpolska.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+\begin{enumerate}
+    \item Redistributions of source code must retain the above copyright
+        notice, this list of conditions, and the following disclaimer.
+
+    \item Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions, and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+
+    \item Neither the name of the author of this software nor the names of
+        contributors to this software may be used to endorse or promote
+        products derived from this software without specific prior written
+        consent.
+\end{enumerate}
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\pagebreak
+\section{Revisions}
+\begin{tabular}{lp{11.65cm}}
+    \toprule
+    \textbf{Timestamp} & \textbf{Changes} \\
+    \midrule
+    2012-03-28T19:00:00Z & initial version \\
+    2012-03-29T14:00:00Z & [deleted] introduced \\
+    2012-04-06T07:30:00Z & [deleted] introduced; values: [deleted] \\
+    2012-04-18T19:00:00Z & paper document type, other style changes. \\
+    2012-04-25T09:00:00Z & RDS can happen in 1000 years; reference updates.\\
+    2012-06-11T18:14:00Z & Updating to reflect [deleted], [deleted] introduced, style modifications. \\
+    2012-06-11T17:00:00Z & [deleted] introduced. \\
+    2012-11-20T20:00:00Z & A very big update to reflect all the changes that were made in the recent days:
+
+    \begin{enumerate}[(a)]
+        \item a \emph{working} version of the RDS itself;
+        \item better mechanisms;
+        \item retirement of [deleted];
+        \item making \textsc{rdsqt} much less important.
+    \end{enumerate} \\
+    2012-11-24T20:00:00Z & An update to cover the Sync mechanism. \\
+    2012-11-25T20:00:00Z & \begin{enumerate}[(a)]
+\item rename to KDS/Kw Data System (originally RDS/Rapid Data System);
+\item more sync coverage;
+\item retirement of \textsc{rdsqt}.
+\end{enumerate} \\
+2012-12-01T20:00:00Z & Sync updates, Py2k requirement. \\
+2012-12-06T20:00:00Z & Even more sync updates. \\
+2012-12-08T20:00:00Z & Rename to Tiedot, going up to git. \\
+    \bottomrule
+\end{tabular}
+\end{document}
