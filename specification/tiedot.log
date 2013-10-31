@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2012.11.30)  9 DEC 2012 17:44
+This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012/Arch Linux) (format=xelatex 2013.1.11)  30 JAN 2013 15:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -18,21 +18,21 @@ lovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian,
 welsh, loaded.
 (/usr/share/texmf-dist/tex/latex/paper/paper.cls
 Document Class: paper 2008/05/30 1.0l LaTeX document class (wm).
-\hours=\count79
-\minutes=\count80
+\hours=\count80
+\minutes=\count81
 (/usr/share/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \beforetitlespace=\skip41
-\c@part=\count81
-\c@section=\count82
-\c@subsection=\count83
-\c@subsubsection=\count84
-\c@paragraph=\count85
-\c@subparagraph=\count86
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
 \exampleindent=\skip42
-\c@figure=\count87
-\c@table=\count88
+\c@figure=\count88
+\c@table=\count89
 \abovecaptionskip=\skip43
 \belowcaptionskip=\skip44
 \bibindent=\dimen102
@@ -340,11 +340,11 @@ Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 (/usr/share/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 130.
+Package color Info: Driver file: xetex.def on input line 130.
 
-(/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count89
+(/usr/share/texmf-dist/tex/xelatex/xetex-def/xetex.def
+File: xetex.def 2009/11/22 v0.94 LaTeX color/graphics driver for XeTeX (RRM/JK)
+
 ))
 (/usr/share/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
@@ -553,7 +553,7 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (/usr/share/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: xetex.def on input line 91.
 )
 \Gin@req@height=\dimen107
 \Gin@req@width=\dimen108
@@ -937,113 +937,69 @@ File: babel.def 2008/07/08 v3.8m Babel common definitions
 )) (./tiedot.aux)
 \openout1 = `tiedot.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 54.
 
 (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 52.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 54.
 
 (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-(/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count155
-\scratchdimen=\dimen190
-\scratchbox=\box46
-\nofMPsegments=\count156
-\nofMParguments=\count157
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count158
-\MPscratchDim=\dimen191
-\MPnumerator=\count159
-\makeMPintoPDFobject=\count160
-\everyMPtoPDFconversion=\toks30
-) (/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for T1+qhv on input line 58.
+LaTeX Font Info:    Try loading font information for T1+qhv on input line 60.
 
 (/usr/share/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
 File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
 )
 
 LaTeX Font Warning: Font shape `T1/qhv/m/sl' in size <14.4> not available
-(Font)              Font shape `T1/qhv/m/it' tried instead on input line 58.
+(Font)              Font shape `T1/qhv/m/it' tried instead on input line 60.
 
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 58.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 60.
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 58.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 60.
 
 (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 58.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 60.
 
 
 (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 58.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 60.
 
 
 (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 58.
+(Font)              <14.4> on input line 60.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 58.
+(Font)              <10> on input line 60.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 58.
+(Font)              <7> on input line 60.
  (./tiedot.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 4.
@@ -1054,42 +1010,42 @@ LaTeX Font Info:    External font `lmex10' loaded for size
  [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1]
+] [1]
 LaTeX Font Info:    Try loading font information for T1+DejaVuSansMono-TLF on i
-nput line 116.
+nput line 118.
 
 (/usr/share/texmf-dist/tex/latex/dejavu/T1DejaVuSansMono-TLF.fd
 File: T1DejaVuSansMono-TLF.fd 2011/06/01 Font definitions for T1/DejaVuSansMono
 -TLF.
 )
 
-LaTeX Warning: Reference `sec:TiedotDP' on page 2 undefined on input line 117.
+LaTeX Warning: Reference `sec:TiedotDP' on page 2 undefined on input line 119.
 
 
-LaTeX Warning: Reference `sec:TiedotDP' on page 2 undefined on input line 117.
+LaTeX Warning: Reference `sec:TiedotDP' on page 2 undefined on input line 119.
 
 [2] [3] [4]
-Overfull \hbox (3.30446pt too wide) in paragraph at lines 265--265
+Overfull \hbox (3.30446pt too wide) in paragraph at lines 267--267
 []|\T1/DejaVuSansMono-TLF/m/n/10 AUTHSTATUS| 
  []
 
 
-Underfull \hbox (badness 7362) in paragraph at lines 273--277
+Underfull \hbox (badness 7362) in paragraph at lines 275--279
 []|\T1/lmr/m/n/10 User mod-i-fi-ca-tion sta-tus. (\T1/lmr/m/it/10 Sync\T1/lmr/m
 /n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--280
+Underfull \hbox (badness 10000) in paragraph at lines 279--282
 []|\T1/lmr/m/n/10 A warn-ing in-form-ing that the
  []
 
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 343.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 345.
 
 (/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [5] [6]
-Overfull \hbox (29.3421pt too wide) in paragraph at lines 377--407
+Overfull \hbox (29.3421pt too wide) in paragraph at lines 379--409
 [] 
  []
 
@@ -1099,32 +1055,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 11820 strings out of 493488
- 199997 string characters out of 3146891
- 263583 words of memory out of 3000000
- 14858 multiletter control sequences out of 15000+200000
- 82248 words of font info for 54 fonts, out of 3000000 for 9000
- 957 hyphenation exceptions out of 8191
+ 11269 strings out of 494004
+ 191574 string characters out of 3155736
+ 251953 words of memory out of 3000000
+ 14289 multiletter control sequences out of 15000+200000
+ 81622 words of font info for 52 fonts, out of 3000000 for 9000
+ 1144 hyphenation exceptions out of 8191
  44i,12n,42p,316b,299s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf-dist/f
-onts/enc/dvips/dejavu/dejavumono_t1-type1.enc}{/usr/share/texmf-dist/fonts/enc/
-dvips/lm/lm-mathit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/font
-s/enc/dvips/tex-gyre/q-ec-sc.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-e
-c.enc}{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/share/texm
-f-dist/fonts/type1/public/dejavu/DejaVuSansMono-Oblique.pfb></usr/share/texmf-d
-ist/fonts/type1/public/dejavu/DejaVuSansMono.pfb></usr/share/texmf-dist/fonts/t
-ype1/public/lm/lmb10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmcsc10.p
-fb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf-di
-st/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm
-/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/share/t
-exmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/tex-gyre/qhvb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr
-.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qhvri.pfb>
-Output written on tiedot.pdf (8 pages, 233918 bytes).
-PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+Output written on tiedot.pdf (8 pages).
