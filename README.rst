@@ -1,1 +1,1 @@
-A fancy new project.  More details to come soon.
+Project abandoned. Please do not use.
